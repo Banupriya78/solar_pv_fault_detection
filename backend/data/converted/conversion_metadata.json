@@ -1,0 +1,172 @@
+{
+  "conversion_timestamp": "2026-10-23 07:07:22 UTC",
+  "conversion_duration_seconds": 78.24,
+  "source_files": {
+    "dataset_elec.mat": {
+      "path": "dataset_elec.mat",
+      "format": "MATLAB 5.0 (Standard)",
+      "size_bytes": 18143444,
+      "variables": {
+        "idc1": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        },
+        "idc2": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        },
+        "vdc1": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        },
+        "vdc2": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "dataset_amb.mat": {
+      "path": "dataset_amb.mat",
+      "format": "MATLAB 5.0 (Standard)",
+      "size_bytes": 9933741,
+      "variables": {
+        "f_nv": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "uint8"
+        },
+        "irr": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        },
+        "pvt": {
+          "shape": [
+            1373798
+          ],
+          "dtype": "float64"
+        }
+      }
+    }
+  },
+  "dataset_integrity": {
+    "total_samples": 1373798,
+    "columns": [
+      "vdc1",
+      "vdc2",
+      "idc1",
+      "idc2",
+      "irr",
+      "pvt",
+      "f_nv"
+    ],
+    "column_descriptions": {
+      "vdc1": "DC Voltage String 1 (V)",
+      "vdc2": "DC Voltage String 2 (V)",
+      "idc1": "DC Current String 1 (A)",
+      "idc2": "DC Current String 2 (A)",
+      "irr": "Solar Irradiance on PV Array Plane (W/m\u00b2)",
+      "pvt": "Back-of-Module Temperature (\u00b0C)",
+      "f_nv": "Ground-Truth Fault Category Label (0 to 4)"
+    },
+    "missing_values": {
+      "vdc1": 0,
+      "vdc2": 0,
+      "idc1": 0,
+      "idc2": 0,
+      "irr": 0,
+      "pvt": 0,
+      "f_nv": 0
+    },
+    "class_distribution": {
+      "0": {
+        "label": "Normal Operation",
+        "count": 1162931,
+        "percentage": 84.65
+      },
+      "1": {
+        "label": "Short-Circuit",
+        "count": 5999,
+        "percentage": 0.44
+      },
+      "2": {
+        "label": "Degradation",
+        "count": 10371,
+        "percentage": 0.75
+      },
+      "3": {
+        "label": "Open-Circuit",
+        "count": 6024,
+        "percentage": 0.44
+      },
+      "4": {
+        "label": "Shadowing",
+        "count": 188473,
+        "percentage": 13.72
+      }
+    },
+    "excel_compatibility_note": "Complete dataset has 1,373,798 rows, exceeding Microsoft Excel's hard limit of 1,048,576 rows. Use dataset_preview_1000.csv for Excel inspection, or Python/pandas for full dataset analysis."
+  },
+  "generated_files": {
+    "dataset_elec.csv": {
+      "rows": 1373798,
+      "columns": [
+        "vdc1",
+        "vdc2",
+        "idc1",
+        "idc2"
+      ],
+      "size_bytes": 42595601,
+      "description": "DC string voltage and current telemetry (4 channels)."
+    },
+    "dataset_amb.csv": {
+      "rows": 1373798,
+      "columns": [
+        "irr",
+        "pvt",
+        "f_nv"
+      ],
+      "size_bytes": 25695128,
+      "description": "Solar irradiance, cell temperature, and ground-truth fault label (3 channels)."
+    },
+    "dataset_combined.csv": {
+      "rows": 1373798,
+      "columns": [
+        "vdc1",
+        "vdc2",
+        "idc1",
+        "idc2",
+        "irr",
+        "pvt",
+        "f_nv"
+      ],
+      "size_bytes": 66916930,
+      "description": "Full unified 7-channel operational telemetry stream (non-truncated)."
+    },
+    "dataset_preview_1000.csv": {
+      "rows": 1000,
+      "columns": [
+        "vdc1",
+        "vdc2",
+        "idc1",
+        "idc2",
+        "irr",
+        "pvt",
+        "f_nv",
+        "fault_label"
+      ],
+      "size_bytes": 62046,
+      "description": "Small 1,000-row preview with human-readable fault labels for spreadsheet applications."
+    }
+  }
+}

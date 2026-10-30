@@ -1,0 +1,436 @@
+
+{
+  "timestamp": "2026-10-23T07:10:34Z",
+  "dataset_info": {
+    "total_raw_stream": 1373798,
+    "operational_window_samples": 46394,
+    "train_samples": 37040,
+    "test_samples": 9354,
+    "test_split_ratio": 0.2,
+    "sampling_rate_hz": 1.0,
+    "duration_days": 16,
+    "features": [
+      "vdc1",
+      "vdc2",
+      "idc1",
+      "idc2",
+      "irr",
+      "pvt",
+      "p1",
+      "p2",
+      "ptotal",
+      "v_diff",
+      "i_diff",
+      "v_ratio",
+      "i_ratio"
+    ]
+  },
+  "methodology": {
+    "split_strategy": "Contiguous Temporal Block Splitting",
+    "anti_leakage_note": "Evaluated strictly on held-out terminal temporal duration blocks to prevent 1-second auto-correlation leakage across adjacent time-series rows.",
+    "explanation": "Trained on 46,394 windowed operational samples derived from the 1,373,798 raw 1 Hz record stream. Retains 100% of minority fault events (Short-Circuit: 5,999, Degradation: 10,371, Open-Circuit: 6,024) while balancing normal and shadowing intervals."
+  },
+  "models": {
+    "decision_tree": {
+      "key": "decision_tree",
+      "name": "Decision Tree",
+      "accuracy": 0.8621,
+      "precision": 0.8999,
+      "recall": 0.8892,
+      "macro_f1": 0.889,
+      "training_time_seconds": 1.273,
+      "model_size_bytes": 30113,
+      "model_size_kb": 29.41,
+      "inference_latency_ms": 0.42,
+      "confusion_matrix": [
+        [
+          1497,
+          0,
+          0,
+          0,
+          923
+        ],
+        [
+          1,
+          1157,
+          31,
+          0,
+          17
+        ],
+        [
+          4,
+          1,
+          2062,
+          12,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          1212,
+          0
+        ],
+        [
+          287,
+          1,
+          10,
+          0,
+          2136
+        ]
+      ],
+      "classification_report": {
+        "Normal Operation": {
+          "precision": 0.8367803242034656,
+          "recall": 0.618595041322314,
+          "f1-score": 0.7113328581610834,
+          "support": 2420.0
+        },
+        "Short-Circuit": {
+          "precision": 0.998274374460742,
+          "recall": 0.9593698175787728,
+          "f1-score": 0.9784355179704017,
+          "support": 1206.0
+        },
+        "Degradation": {
+          "precision": 0.9805040418449834,
+          "recall": 0.9903938520653218,
+          "f1-score": 0.9854241338112306,
+          "support": 2082.0
+        },
+        "Open-Circuit": {
+          "precision": 0.9901960784313726,
+          "recall": 1.0,
+          "f1-score": 0.9950738916256158,
+          "support": 1212.0
+        },
+        "Shadowing": {
+          "precision": 0.69373173108152,
+          "recall": 0.8775677896466721,
+          "f1-score": 0.7748957010701977,
+          "support": 2434.0
+        },
+        "accuracy": 0.8620910840282232,
+        "macro avg": {
+          "precision": 0.8998973100044168,
+          "recall": 0.8891853001226162,
+          "f1-score": 0.8890324205277057,
+          "support": 9354.0
+        },
+        "weighted avg": {
+          "precision": 0.8722468864447873,
+          "recall": 0.8620910840282232,
+          "f1-score": 0.8600809804438975,
+          "support": 9354.0
+        }
+      },
+      "feature_importances": [
+        {
+          "feature": "ptotal",
+          "importance": 0.2923
+        },
+        {
+          "feature": "idc1",
+          "importance": 0.2216
+        },
+        {
+          "feature": "vdc2",
+          "importance": 0.1982
+        },
+        {
+          "feature": "vdc1",
+          "importance": 0.1626
+        },
+        {
+          "feature": "i_diff",
+          "importance": 0.0489
+        },
+        {
+          "feature": "p2",
+          "importance": 0.047
+        },
+        {
+          "feature": "p1",
+          "importance": 0.0122
+        },
+        {
+          "feature": "i_ratio",
+          "importance": 0.0067
+        },
+        {
+          "feature": "irr",
+          "importance": 0.0035
+        },
+        {
+          "feature": "pvt",
+          "importance": 0.003
+        },
+        {
+          "feature": "v_ratio",
+          "importance": 0.0025
+        },
+        {
+          "feature": "v_diff",
+          "importance": 0.0009
+        },
+        {
+          "feature": "idc2",
+          "importance": 0.0007
+        }
+      ],
+      "supports_feature_importance": true
+    },
+    "random_forest": {
+      "key": "random_forest",
+      "name": "Random Forest",
+      "accuracy": 0.9189,
+      "precision": 0.9425,
+      "recall": 0.9333,
+      "macro_f1": 0.9341,
+      "training_time_seconds": 7.888,
+      "model_size_bytes": 3371857,
+      "model_size_kb": 3292.83,
+      "inference_latency_ms": 54.828,
+      "confusion_matrix": [
+        [
+          1831,
+          0,
+          0,
+          0,
+          589
+        ],
+        [
+          0,
+          1160,
+          30,
+          0,
+          16
+        ],
+        [
+          0,
+          0,
+          2067,
+          10,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          1212,
+          0
+        ],
+        [
+          97,
+          3,
+          9,
+          0,
+          2325
+        ]
+      ],
+      "classification_report": {
+        "Normal Operation": {
+          "precision": 0.9496887966804979,
+          "recall": 0.7566115702479339,
+          "f1-score": 0.8422263109475621,
+          "support": 2420.0
+        },
+        "Short-Circuit": {
+          "precision": 0.9974204643164231,
+          "recall": 0.9618573797678275,
+          "f1-score": 0.9793161671591388,
+          "support": 1206.0
+        },
+        "Degradation": {
+          "precision": 0.9814814814814815,
+          "recall": 0.9927953890489913,
+          "f1-score": 0.9871060171919771,
+          "support": 2082.0
+        },
+        "Open-Circuit": {
+          "precision": 0.9918166939443536,
+          "recall": 1.0,
+          "f1-score": 0.9958915365653246,
+          "support": 1212.0
+        },
+        "Shadowing": {
+          "precision": 0.7921635434412265,
+          "recall": 0.9552177485620378,
+          "f1-score": 0.8660830694729,
+          "support": 2434.0
+        },
+        "accuracy": 0.9188582424631174,
+        "macro avg": {
+          "precision": 0.9425141959727965,
+          "recall": 0.9332964175253581,
+          "f1-score": 0.9341246202673805,
+          "support": 9354.0
+        },
+        "weighted avg": {
+          "precision": 0.9273881024346116,
+          "recall": 0.9188582424631174,
+          "f1-score": 0.9182664562000138,
+          "support": 9354.0
+        }
+      },
+      "feature_importances": [
+        {
+          "feature": "vdc2",
+          "importance": 0.1248
+        },
+        {
+          "feature": "idc1",
+          "importance": 0.1175
+        },
+        {
+          "feature": "ptotal",
+          "importance": 0.1141
+        },
+        {
+          "feature": "v_ratio",
+          "importance": 0.1044
+        },
+        {
+          "feature": "v_diff",
+          "importance": 0.0939
+        },
+        {
+          "feature": "vdc1",
+          "importance": 0.0721
+        },
+        {
+          "feature": "p2",
+          "importance": 0.0709
+        },
+        {
+          "feature": "idc2",
+          "importance": 0.0625
+        },
+        {
+          "feature": "i_ratio",
+          "importance": 0.0572
+        },
+        {
+          "feature": "i_diff",
+          "importance": 0.0534
+        },
+        {
+          "feature": "pvt",
+          "importance": 0.0483
+        },
+        {
+          "feature": "p1",
+          "importance": 0.0478
+        },
+        {
+          "feature": "irr",
+          "importance": 0.0328
+        }
+      ],
+      "supports_feature_importance": true
+    },
+    "svm": {
+      "key": "svm",
+      "name": "Support Vector Machine (RBF)",
+      "accuracy": 0.9169,
+      "precision": 0.9396,
+      "recall": 0.9324,
+      "macro_f1": 0.9323,
+      "training_time_seconds": 15.007,
+      "model_size_bytes": 208543,
+      "model_size_kb": 203.66,
+      "inference_latency_ms": 1.135,
+      "confusion_matrix": [
+        [
+          2314,
+          0,
+          0,
+          0,
+          106
+        ],
+        [
+          0,
+          1166,
+          40,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          2056,
+          14,
+          6
+        ],
+        [
+          0,
+          0,
+          0,
+          1212,
+          0
+        ],
+        [
+          586,
+          3,
+          16,
+          0,
+          1829
+        ]
+      ],
+      "classification_report": {
+        "Normal Operation": {
+          "precision": 0.7962835512732278,
+          "recall": 0.956198347107438,
+          "f1-score": 0.8689447990987608,
+          "support": 2420.0
+        },
+        "Short-Circuit": {
+          "precision": 0.9974337040205303,
+          "recall": 0.966832504145937,
+          "f1-score": 0.9818947368421053,
+          "support": 1206.0
+        },
+        "Degradation": {
+          "precision": 0.9734848484848485,
+          "recall": 0.9875120076849183,
+          "f1-score": 0.9804482594182165,
+          "support": 2082.0
+        },
+        "Open-Circuit": {
+          "precision": 0.9885807504078303,
+          "recall": 1.0,
+          "f1-score": 0.9942575881870386,
+          "support": 1212.0
+        },
+        "Shadowing": {
+          "precision": 0.9422977846470891,
+          "recall": 0.7514379622021364,
+          "f1-score": 0.8361142857142857,
+          "support": 2434.0
+        },
+        "accuracy": 0.9169339320076972,
+        "macro avg": {
+          "precision": 0.9396161277667053,
+          "recall": 0.932396164228086,
+          "f1-score": 0.9323319338520812,
+          "support": 9354.0
+        },
+        "weighted avg": {
+          "precision": 0.9245691012401894,
+          "recall": 0.9169339320076972,
+          "f1-score": 0.9160195756757077,
+          "support": 9354.0
+        }
+      },
+      "feature_importances": [],
+      "supports_feature_importance": false
+    }
+  },
+  "labels": {
+    "0": "Normal Operation",
+    "1": "Short-Circuit",
+    "2": "Degradation",
+    "3": "Open-Circuit",
+    "4": "Shadowing"
+  }
+}
