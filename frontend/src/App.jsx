@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar } from 'lucide-react';
+import { Calendar, Menu } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FaultPrediction from './components/FaultPrediction';
@@ -114,79 +114,86 @@ export default function App() {
     }
   };
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const formattedTimestamp = formatTimestamp(lastPredictionTime);
 
   return (
-    <div className="app-shell" style={{ background: '#f8fafc', minHeight: '100vh', display: 'flex' }}>
+    <div className="app-shell">
+      {/* Mobile Backdrop Overlay */}
+      <div 
+        className={`sidebar-overlay ${sidebarOpen ? 'open' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden="true"
+      />
+
       {/* Sidebar Navigation */}
       <Sidebar
         activePage={activePage}
-        setActivePage={setActivePage}
+        setActivePage={(page) => {
+          setActivePage(page);
+          setSidebarOpen(false);
+        }}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
       />
 
       {/* Main Body */}
-      <div 
-        className="main-wrapper" 
-        style={{ 
-          marginLeft: '240px',
-          width: 'calc(100% - 240px)',
-          minHeight: '100vh',
-          background: '#f8fafc',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
+      <div className="main-wrapper">
         {/* Top Header Bar for all pages */}
-        <header style={{
-          background: '#ffffff',
-          borderBottom: '1px solid #f1f5f9',
-          padding: '1.2rem 2rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          position: 'sticky',
-          top: 0,
-          zIndex: 50
-        }}>
-          <div>
-            <h1 style={{ 
-              fontSize: '1.4rem', 
-              fontWeight: 700, 
-              color: '#0f172a', 
-              letterSpacing: '-0.02em', 
-              margin: 0, 
-              fontFamily: 'var(--font-heading)' 
-            }}>
-              {pageHeaders[activePage]?.title || 'PV Monitor'}
-            </h1>
-            <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '0.2rem' }}>
-              {pageHeaders[activePage]?.subtitle || ''}
+        <header className="app-header">
+          <div className="header-content-left" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <button
+              type="button"
+              className="mobile-menu-btn"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open navigation menu"
+            >
+              <Menu size={22} />
+            </button>
+            <div>
+              <h1 style={{ 
+                fontSize: '1.4rem', 
+                fontWeight: 700, 
+                color: '#0f172a', 
+                letterSpacing: '-0.02em', 
+                margin: 0, 
+                fontFamily: 'var(--font-heading)',
+                lineHeight: 1.2
+              }}>
+                {pageHeaders[activePage]?.title || 'PV Monitor'}
+              </h1>
+              <div style={{ fontSize: '0.82rem', color: '#64748b', marginTop: '0.2rem' }}>
+                {pageHeaders[activePage]?.subtitle || ''}
+              </div>
             </div>
           </div>
 
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.45rem', 
-            color: '#1e40af', 
-            fontSize: '0.82rem', 
-            fontWeight: 500,
-            background: '#eff6ff',
-            padding: '0.45rem 0.85rem',
-            borderRadius: '8px',
-            border: '1px solid #bfdbfe'
-          }}>
-            <Calendar size={15} color="#2563eb" />
-            <span>
-              {formattedTimestamp 
-                ? `Last diagnosis: ${formattedTimestamp}` 
-                : 'Last diagnosis: 26 Oct 2026, 16:21 UTC'}
-            </span>
+          <div className="header-badge-wrapper">
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '0.45rem', 
+              color: '#1e40af', 
+              fontSize: '0.82rem', 
+              fontWeight: 500,
+              background: '#eff6ff',
+              padding: '0.45rem 0.85rem',
+              borderRadius: '8px',
+              border: '1px solid #bfdbfe',
+              whiteSpace: 'nowrap'
+            }}>
+              <Calendar size={15} color="#2563eb" />
+              <span>
+                {formattedTimestamp 
+                  ? `Last diagnosis: ${formattedTimestamp}` 
+                  : 'Last diagnosis: 26 Oct 2026, 16:21 UTC'}
+              </span>
+            </div>
           </div>
         </header>
 
         {/* Content Body */}
-        <main className="content-body" style={{ padding: '1.5rem 2rem', flex: 1 }}>
+        <main className="content-body">
           {activePage === 'dashboard' && (
             <Dashboard 
               setActivePage={setActivePage} 

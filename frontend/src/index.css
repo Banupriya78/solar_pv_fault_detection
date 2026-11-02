@@ -97,6 +97,15 @@
   --purple: #a855f7;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -911,61 +920,355 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   Responsive Adaptations (1366px Laptops & Mobile Screens)
+   Comprehensive Responsive Architecture (Mobile, Tablet & Desktop)
    ========================================================================== */
 
-/* Laptop screens (<= 1366px) */
-@media (max-width: 1366px) {
-  .top-bar {
-    padding: 1rem 1.75rem;
-  }
-  .content-body {
-    padding: 1.5rem 1.75rem;
-  }
-  .stat-grid-4 {
+/* Layout Shell */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.app-sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-right: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 1.25rem 1rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+.mobile-close-btn {
+  display: none;
+}
+
+.main-wrapper {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  max-width: calc(100% - 240px);
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.25s ease, width 0.25s ease;
+}
+
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.content-body {
+  padding: 1.5rem 2rem;
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Dashboard KPI Stat Cards Grid */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* Dashboard Latest Diagnosis 5-Column Metrics */
+.latest-diagnosis-metrics-grid {
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 1.35rem 1.75rem;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 0.9fr 1fr 1.25fr;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+/* Fault Prediction 2-Column Main Layout */
+.fault-prediction-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Prediction Form Inputs Grid */
+.prediction-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+}
+
+/* Live Computed Metrics Strip */
+.live-metrics-preview-grid {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+/* Diagnosis Result Strip */
+.prediction-result-strip {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Action Buttons Flex */
+.prediction-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* Horizontal Table Scroll Container */
+.responsive-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+}
+
+.responsive-table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.responsive-table-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.responsive-table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.responsive-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Modal Responsive Grids */
+.report-modal-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.report-modal-readings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.65rem;
+}
+
+/* Large Laptop Screens (<= 1200px) */
+@media (max-width: 1200px) {
+  .dashboard-stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
-  .prediction-layout {
-    grid-template-columns: 1fr 1fr;
+
+  .latest-diagnosis-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+}
+
+/* Tablet Screens (<= 1023px) */
+@media (max-width: 1023px) {
+  .app-sidebar {
+    width: 260px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    box-shadow: none;
+  }
+
+  .app-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.25);
+  }
+
+  .mobile-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .main-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  .app-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #0f172a;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: #f8fafc;
+  }
+
+  .content-body {
+    padding: 1.25rem;
+  }
+
+  .fault-prediction-layout {
+    grid-template-columns: 1fr;
     gap: 1.25rem;
   }
-}
 
-/* Tablet screens (<= 1024px) */
-@media (max-width: 1024px) {
-  .prediction-layout {
-    grid-template-columns: 1fr;
-  }
-  div[style*="grid-template-columns: 1.4fr 1fr"],
-  div[style*="grid-template-columns: 1.3fr 1fr"] {
-    grid-template-columns: 1fr !important;
+  .latest-diagnosis-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.2rem;
   }
 }
 
-/* Mobile screens (<= 768px) */
+/* Mobile Screens (<= 768px) */
 @media (max-width: 768px) {
-  .sidebar {
-    width: 68px !important;
+  .live-metrics-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
   }
-  .main-wrapper {
-    margin-left: 68px !important;
-    width: calc(100% - 68px) !important;
-    max-width: calc(100% - 68px) !important;
-  }
-  .top-bar {
+}
+
+/* Small Mobile Screens (<= 640px) */
+@media (max-width: 639px) {
+  .app-header {
     padding: 0.85rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
   }
-  .top-bar-title {
-    font-size: 1rem;
+
+  .header-content-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
   }
+
+  .header-badge-wrapper {
+    width: 100%;
+  }
+
+  .header-badge-wrapper > div {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
   .content-body {
+    padding: 0.85rem 0.75rem;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .latest-diagnosis-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
     padding: 1rem;
   }
-  .stat-grid-4 {
+
+  .prediction-result-strip {
     grid-template-columns: 1fr;
+    gap: 0.65rem;
   }
-  .preset-grid {
+
+  .prediction-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .report-modal-overview-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .report-modal-readings-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .prediction-action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .prediction-action-buttons > button {
+    width: 100% !important;
   }
 }
 

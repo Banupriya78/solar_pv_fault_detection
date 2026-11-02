@@ -298,8 +298,8 @@ export default function DiagnosisHistory() {
         </div>
 
         {/* Table */}
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
+        <div className="responsive-table-scroll">
+          <table style={{ width: '100%', minWidth: '700px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
                 <th style={{ padding: '0.75rem 1rem', color: '#64748b', fontWeight: 600, width: '60px' }}>ID</th>

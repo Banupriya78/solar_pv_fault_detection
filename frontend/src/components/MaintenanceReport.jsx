@@ -165,7 +165,7 @@ export default function MaintenanceReport({ record, onClose }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1.25rem',
+        padding: '0.75rem',
         animation: 'fadeIn 0.15s ease-out'
       }}
     >
@@ -177,7 +177,7 @@ export default function MaintenanceReport({ record, onClose }) {
           borderRadius: '16px',
           width: '100%',
           maxWidth: '680px',
-          maxHeight: '90vh',
+          maxHeight: '92vh',
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.25)',
@@ -256,11 +256,7 @@ export default function MaintenanceReport({ record, onClose }) {
         }}>
           
           {/* 1. Status Overview Strip (Subtle & Professional 4 Columns) */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '0.75rem'
-          }}>
+          <div className="report-modal-overview-grid">
             <div style={{
               background: '#f8fafc',
               border: '1px solid #e2e8f0',
@@ -372,11 +368,7 @@ export default function MaintenanceReport({ record, onClose }) {
             <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.55rem' }}>
               Recorded Telemetry
             </div>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '0.65rem'
-            }}>
+            <div className="report-modal-readings-grid">
               <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '0.65rem 0.75rem' }}>
                 <div style={{ fontSize: '0.7rem', color: '#64748b' }}>Panel Line 1 (V / I)</div>
                 <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0f172a', marginTop: '3px' }}>

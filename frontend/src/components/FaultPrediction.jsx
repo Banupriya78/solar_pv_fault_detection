@@ -223,12 +223,7 @@ export default function FaultPrediction({ onPredictionSuccess }) {
     <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
       {/* 2-Column Grid: Left Input Form | Right Diagnosis Result */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1.1fr 1fr',
-        gap: '1.5rem',
-        alignItems: 'start'
-      }}>
+      <div className="fault-prediction-layout">
 
         {/* ====================================================
             LEFT PANEL: Solar Panel Readings (Renamed professionally)
@@ -322,11 +317,7 @@ export default function FaultPrediction({ onPredictionSuccess }) {
 
           {/* Form with Dynamic 4 or 6 Inputs based on Mode */}
           <form onSubmit={handlePredict} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1rem 1.25rem'
-            }}>
+            <div className="prediction-form-grid">
               {/* 1. Panel Voltage */}
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
@@ -512,16 +503,7 @@ export default function FaultPrediction({ onPredictionSuccess }) {
             </div>
 
             {/* Live Computed Metrics Preview */}
-            <div style={{
-              background: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              borderRadius: '10px',
-              padding: '0.85rem 1rem',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '0.5rem',
-              textAlign: 'center'
-            }}>
+            <div className="live-metrics-preview-grid">
               {lineMode === 'single' ? (
                 <>
                   <div>
@@ -566,7 +548,7 @@ export default function FaultPrediction({ onPredictionSuccess }) {
             </div>
 
             {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.5rem' }}>
+            <div className="prediction-action-buttons">
               <button
                 type="submit"
                 disabled={loading}
@@ -732,11 +714,7 @@ export default function FaultPrediction({ onPredictionSuccess }) {
               </div>
 
               {/* Location, Confidence & Status Strip */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1.15fr 1fr 1fr',
-                gap: '0.75rem'
-              }}>
+              <div className="prediction-result-strip">
                 <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '0.85rem 1rem' }}>
                   <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 500 }}>Fault Location</div>
                   <div style={{

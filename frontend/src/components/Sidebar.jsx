@@ -1,9 +1,11 @@
 import React from 'react';
-import { Home, Zap, Sun, History, FileText } from 'lucide-react';
+import { Home, Zap, Sun, History, FileText, X } from 'lucide-react';
 
 export default function Sidebar({ 
   activePage, 
-  setActivePage 
+  setActivePage,
+  sidebarOpen,
+  setSidebarOpen
 }) {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
@@ -13,59 +15,59 @@ export default function Sidebar({
   ];
 
   return (
-    <aside style={{
-      width: '240px',
-      background: '#ffffff',
-      borderRight: '1px solid #f1f5f9',
-      display: 'flex',
-      flexDirection: 'column',
-      position: 'fixed',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      zIndex: 100,
-      padding: '1.25rem 1rem'
-    }}>
-      {/* Upper-Left Project Name Branding */}
+    <aside className={`app-sidebar ${sidebarOpen ? 'open' : ''}`}>
+      {/* Upper-Left Project Name Branding + Mobile Close Button */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '0.75rem',
+        justifyContent: 'space-between',
         padding: '0.25rem 0.5rem 1.25rem 0.5rem',
         marginBottom: '0.85rem',
         borderBottom: '1px solid #f1f5f9'
       }}>
-        <div style={{
-          width: 38,
-          height: 38,
-          borderRadius: '10px',
-          background: '#eff6ff',
-          color: '#2563eb',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0
-        }}>
-          <Sun size={22} color="#2563eb" />
-        </div>
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div style={{
-            fontSize: '1.05rem',
-            fontWeight: 700,
-            color: '#0f172a',
-            fontFamily: 'var(--font-heading)',
-            lineHeight: 1.2
+            width: 38,
+            height: 38,
+            borderRadius: '10px',
+            background: '#eff6ff',
+            color: '#2563eb',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
           }}>
-            PV Monitor
+            <Sun size={22} color="#2563eb" />
           </div>
-          <div style={{
-            fontSize: '0.72rem',
-            color: '#64748b',
-            marginTop: '2px'
-          }}>
-            Solar PV Fault Detection
+          <div>
+            <div style={{
+              fontSize: '1.05rem',
+              fontWeight: 700,
+              color: '#0f172a',
+              fontFamily: 'var(--font-heading)',
+              lineHeight: 1.2
+            }}>
+              PV Monitor
+            </div>
+            <div style={{
+              fontSize: '0.72rem',
+              color: '#64748b',
+              marginTop: '2px'
+            }}>
+              Solar PV Fault Detection
+            </div>
           </div>
         </div>
+
+        {/* Close Button on Mobile Drawer */}
+        <button
+          type="button"
+          onClick={() => setSidebarOpen && setSidebarOpen(false)}
+          className="mobile-close-btn"
+          aria-label="Close navigation sidebar"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       {/* Navigation Items */}
@@ -76,7 +78,10 @@ export default function Sidebar({
           return (
             <button
               key={item.id}
-              onClick={() => setActivePage(item.id)}
+              onClick={() => {
+                setActivePage(item.id);
+                if (setSidebarOpen) setSidebarOpen(false);
+              }}
               style={{
                 display: 'flex',
                 alignItems: 'center',

@@ -184,11 +184,7 @@ export default function Dashboard({ setActivePage, refreshKey, onPredictionUpdat
       {/* ========================================================
           1. TOP 4 SUMMARY STAT CARDS (Matching user screenshot)
           ======================================================== */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '1.25rem'
-      }}>
+      <div className="dashboard-stats-grid">
         
         {/* Card 1: Last Diagnosis */}
         <div style={{
@@ -428,16 +424,7 @@ export default function Dashboard({ setActivePage, refreshKey, onPredictionUpdat
         </div>
 
         {/* Inner Metrics Box (5 Balanced Columns: Fault, Fault Location, Confidence, Severity / Priority, Recommended Action) */}
-        <div style={{
-          background: '#ffffff',
-          border: '1px solid #f1f5f9',
-          borderRadius: '12px',
-          padding: '1.35rem 1.75rem',
-          display: 'grid',
-          gridTemplateColumns: '1.15fr 1fr 0.9fr 1fr 1.25fr',
-          gap: '1.25rem',
-          alignItems: 'center'
-        }}>
+        <div className="latest-diagnosis-metrics-grid">
           {/* Column 1: Fault */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
             <div style={{
@@ -608,8 +595,8 @@ export default function Dashboard({ setActivePage, refreshKey, onPredictionUpdat
         </div>
 
         {/* Clean Table Matching Screenshot */}
-        <div style={{ overflowX: 'auto', marginTop: '0.25rem' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
+        <div className="responsive-table-scroll" style={{ marginTop: '0.25rem' }}>
+          <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
                 <th style={{ padding: '0.85rem 1rem', color: '#64748b', fontWeight: 500, width: '48px' }}>#</th>

@@ -1,8 +1,12 @@
 /**
  * Frontend API Client for Solar PV Fault Classification Backend
+ * Automatically uses local proxy during development and Render web service in production
  */
 
-const API_BASE = 'https://solar-pv-api-ugdl.onrender.com/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL ||
+  (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? '/api'
+    : 'https://solar-pv-api-ugdl.onrender.com/api');
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
