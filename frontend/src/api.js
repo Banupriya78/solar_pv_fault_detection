@@ -2,7 +2,7 @@
  * Frontend API Client for Solar PV Fault Classification Backend
  */
 
-const API_BASE = '/api';
+const API_BASE = 'https://solar-pv-api-ugdl.onrender.com/api';
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
